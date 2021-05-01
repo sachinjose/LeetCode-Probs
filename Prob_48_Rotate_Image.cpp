@@ -16,6 +16,12 @@ void rotate(vector<vector<int> >& matrix) {
     }
 }
 
+// ## TO rotate image by 90 -> Transpose, Reverse Each Row
+// To rotate by -90 -> Transpose, Reverse each column
+// Rotate by +180 -> 1) Rotate by 90 twice
+// 					2)Revese each Row, Reverse eacch column
+// Rotate by -180 -> Rotate by 180, they are the same
+
 int main(){
 
 	vector<vector<int> > matrix;
