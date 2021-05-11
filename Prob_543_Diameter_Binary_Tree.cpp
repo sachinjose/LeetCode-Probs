@@ -15,18 +15,27 @@ class TreeNode{
 	}
 };
 
-
-TreeNode* invertTree(TreeNode* root) {
+int height(TreeNode* root){
 	if(root == NULL){
-		return root;
+		return 0;
 	}
-    swap(root->left,root->right);
-    root->left = invertTree(root->left);
-    root->right = invertTree(root->right);
-    return root;
+	return 1 + max(height(root->left),height(root->right));
+}
+
+int diameterOfBinaryTree(TreeNode* root) {
+    if(root == NULL){
+    	return 0;
+    }
+    int op1 = height(root->left) + height(root->right);
+    int op2 = diameterOfBinaryTree(root->left);
+    int op3 = diameterOfBinaryTree(root->right);
+
+    return max(op1,max(op2,op3));
 }
 
 int main(){
+
+	vector<vector<int> > v;
 
 	TreeNode* head = new TreeNode(1);
 	TreeNode* a = new TreeNode(2);
@@ -44,7 +53,14 @@ int main(){
 	b->left = e;
 	b->right = f;
 
-	head  = invertTree(head);
+	v = zigzagLevelOrder(head);
+
+
+	for (int i = 0; i <v.size(); i++){
+		for (int j = 0; j <v[i].size(); j++){
+			cout<<v[i][j]<<endl;
+		}
+	}
 
     return 0;
 }

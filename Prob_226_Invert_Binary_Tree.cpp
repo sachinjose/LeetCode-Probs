@@ -16,15 +16,28 @@ class TreeNode{
 };
 
 
-TreeNode* invertTree(TreeNode* root) {
-	if(root == NULL){
-		return root;
+bool helperSymmetric(TreeNode* l,TreeNode* r){
+	if(l == NULL && r == NULL){
+		return true;
 	}
-    swap(root->left,root->right);
-    root->left = invertTree(root->left);
-    root->right = invertTree(root->right);
-    return root;
+	if(l == NULL || r == NULL){
+		return false;
+	}
+	if(l->val == r->val){
+		return helperSymmetric(l->left,r->right) && helperSymmetric(l->right,r->left);
+	}
+	else{
+		return false;
+	}
 }
+
+bool isSymmetric(TreeNode* root){
+	if(root == NULL){
+		return true;
+	}
+	return helperSymmetric(root->left,root->right);
+}
+
 
 int main(){
 
@@ -44,7 +57,7 @@ int main(){
 	b->left = e;
 	b->right = f;
 
-	head  = invertTree(head);
+	isSymmetric(headA);
 
     return 0;
 }
